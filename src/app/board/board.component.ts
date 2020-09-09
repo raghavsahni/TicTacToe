@@ -13,7 +13,6 @@ export class BoardComponent {
   @ViewChildren(SquareComponent) private squares: QueryList<SquareComponent>;
   movementHistory: Movement[] = [];
   currentPlayer: string = 'X';
-  
   hasGameStarted : boolean = false;
   hasGameFinished: boolean = false;
   finishedAsDraw: boolean = false;
@@ -37,6 +36,7 @@ export class BoardComponent {
   
 
   handleSquareClick(squareNumber: number) {
+    this.hasGameStarted=true;
     const square = this.getSquare(squareNumber);
     this.movementHistory.push({
       player: this.currentPlayer,
@@ -53,19 +53,20 @@ export class BoardComponent {
       this.finishedAsDraw = true;
     } else {
       this.currentPlayer = (this.currentPlayer === 'X') ? 'O' : 'X';
-      this.hasGameStarted=true;
+      
     }
   }
 
   restart() {
-    this.resBool=false;
-    this.hasGameStarted=false;
+    // this.resBool=false;
+    this.hasGameStarted = false;
     this.hasGameFinished = false;
     this.finishedAsDraw = false;
     this.currentPlayer = 'X';
     this.movementHistory = [];
-    this.name1='';
-    this.name2='';
+    this.name1 = '';
+    this.name2 = '';
+    this.start = false;
     this.squares.forEach((square) => {
       square.text = '';
       square.enabled = true;
@@ -94,18 +95,8 @@ export class BoardComponent {
         move.squareNumber === b ||
         move.squareNumber === c);
 
-      if (matchingMovements.length === 3) {
-        // this.resultName = this.currentPlayer;
-        // if(this.resultName.length >0 )
-        
-        
-        // setTimeout(function(){
-        //   this.resBool=true;
-        // },3000);
-        // this.restart();
-        
+      if (matchingMovements.length === 3) {        
         return true;
-        
       }
     }
 
