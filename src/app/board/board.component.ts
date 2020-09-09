@@ -2,19 +2,27 @@ import { Component, ViewChildren, QueryList } from '@angular/core';
 import { SquareComponent } from '../square/square.component';
 import { Movement } from '../models/movement';
 
+
 @Component({
   selector: 'board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css']
+  
 })
 export class BoardComponent {
   @ViewChildren(SquareComponent) private squares: QueryList<SquareComponent>;
   movementHistory: Movement[] = [];
   currentPlayer: string = 'X';
+  
+  hasGameStarted : boolean = false;
   hasGameFinished: boolean = false;
   finishedAsDraw: boolean = false;
   resBool: boolean = false;
   resultName : string = '';
+  name1 : string ='';
+  name2 : string ='';
+  start : boolean = false;
+ 
   
   winningCombinations = [
     [0, 1, 2],
@@ -26,6 +34,7 @@ export class BoardComponent {
     [0, 4, 8],
     [2, 4, 6]
   ];
+  
 
   handleSquareClick(squareNumber: number) {
     const square = this.getSquare(squareNumber);
@@ -44,15 +53,19 @@ export class BoardComponent {
       this.finishedAsDraw = true;
     } else {
       this.currentPlayer = (this.currentPlayer === 'X') ? 'O' : 'X';
+      this.hasGameStarted=true;
     }
   }
 
   restart() {
     this.resBool=false;
+    this.hasGameStarted=false;
     this.hasGameFinished = false;
     this.finishedAsDraw = false;
     this.currentPlayer = 'X';
     this.movementHistory = [];
+    this.name1='';
+    this.name2='';
     this.squares.forEach((square) => {
       square.text = '';
       square.enabled = true;
@@ -60,7 +73,9 @@ export class BoardComponent {
     })
     
   }
-
+  onStart(){
+    this.start = true;
+  }
   getMovementsFromPlayer(playerName: string) {
     return this.movementHistory.filter((movement) => movement.player === playerName);
   }

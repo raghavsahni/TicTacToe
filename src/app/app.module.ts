@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule} from '@angular/forms';
+
 
 import { AppComponent } from './app.component';
 import { SquareComponent } from './square/square.component';
@@ -14,6 +16,7 @@ import { CountdownModule } from 'ngx-countdown';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     CountdownModule 
   ],
   providers: [],
