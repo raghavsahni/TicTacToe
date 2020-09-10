@@ -17,8 +17,7 @@ class='border'
 type='text'
 [(ngModel)]="name2"
 placeholder="Player2">
-<!-- <br>
-<countdown [config]="{ leftTime: 5, format: 's' }"></countdown> -->
+
 
 <div *ngIf='start' >
 
@@ -56,6 +55,17 @@ placeholder="Player2">
     </p>
   </ng-container>
 </div>
+
+<br>
+<countdown [config]="{ leftTime: 5, format: 's' }"></countdown>
+
+<!-- Timer mode:
+<countdown-timer [start]="'2017-01-01 00:00:50'"></countdown-timer>
+ 
+Countdown:
+<countdown-timer [end]="'2018-01-01 00:00:50'"></countdown-timer> -->
+<br>
+
 
 <button 
 *ngIf='hasGameFinished || finishedAsDraw '

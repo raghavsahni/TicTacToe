@@ -7,6 +7,8 @@ import { AppComponent } from './app.component';
 import { SquareComponent } from './square/square.component';
 import { BoardComponent } from './board/board.component';
 import { CountdownModule } from 'ngx-countdown';
+// import { CountdownTimerModule } from 'ngx-countdown-timer';
+ 
 
 @NgModule({
   declarations: [
@@ -17,7 +19,9 @@ import { CountdownModule } from 'ngx-countdown';
   imports: [
     BrowserModule,
     FormsModule,
-    CountdownModule 
+    CountdownModule,
+    // CountdownTimerModule,
+    // CountdownTimerModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -16,8 +16,8 @@ export class BoardComponent {
   hasGameStarted : boolean = false;
   hasGameFinished: boolean = false;
   finishedAsDraw: boolean = false;
-  resBool: boolean = false;
-  resultName : string = '';
+  // resBool: boolean = false;
+  // resultName : string = '';
   name1 : string ='';
   name2 : string ='';
   start : boolean = false;
@@ -77,9 +77,9 @@ export class BoardComponent {
   onStart(){
     this.start = true;
   }
-  getMovementsFromPlayer(playerName: string) {
-    return this.movementHistory.filter((movement) => movement.player === playerName);
-  }
+  // getMovementsFromPlayer(playerName: string) {
+  //   return this.movementHistory.filter((movement) => movement.player === playerName);
+  // }
 
   private getSquare(squareNumber: number): SquareComponent {
     return this.squares.find((square) => square.squareNumber == squareNumber);

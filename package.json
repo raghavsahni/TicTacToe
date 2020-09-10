@@ -21,6 +21,7 @@
     "@angular/router": "~10.1.0",
     "bootstrap": "^4.5.2",
     "ngx-countdown": "^10.0.1",
+    "ngx-countdown-timer": "^0.1.9",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

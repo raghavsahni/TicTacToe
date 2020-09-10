@@ -3,6 +3,7 @@
     height: 80px;
     border: 1px solid black;
     cursor: pointer;
+    margin:0px
 }
 
 .disabled {

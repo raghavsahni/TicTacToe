@@ -1,6 +1,7 @@
 .board-row {
     display: flex;
     margin-left: 170px;
+    margin-top: 0%;
     
 }
 .p {
@@ -16,6 +17,7 @@
 .border{
     border-radius: 5px;
   }
+
 .btn {
     border-radius: 25px;
 }
