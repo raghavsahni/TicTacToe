@@ -7,33 +7,35 @@ import { Movement } from '../models/movement';
   selector: 'board',
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.css']
-  
+
 })
 export class BoardComponent {
   @ViewChildren(SquareComponent) private squares: QueryList<SquareComponent>;
   movementHistory: Movement[] = [];
   currentPlayer: string = 'X';
-  hasGameStarted : boolean = false;
+  hasGameStarted: boolean = false;
   hasGameFinished: boolean = false;
   finishedAsDraw: boolean = false;
   // resBool: boolean = false;
   // resultName : string = '';
-  name1 : string ='';
-  name2 : string ='';
-  start : boolean = false;
-  i : number = 0;
+  name1: string = '';
+  name2: string = '';
+  start: boolean = false;
+  i: number = 0;
+
+  timeLeft: number = 10;
+  interval;
+
  
-  // constructor(){
-  //   (function repeat(times){
-  //     if (++(this.i) > 5) return;
-  //     setTimeout(function(){
-  //       console.log("Iteration: " + this.i);
-  //       repeat();
-  //     }, 5000);
-  //   })();
-  // }
-  
-  
+
+  ngDoCheck() {
+    if (this.timeLeft === 0) {
+      this.hasGameFinished = true;
+      this.pauseTimer();
+      this.disableAllSquares();
+    }
+  }
+
   winningCombinations = [
     [0, 1, 2],
     [3, 4, 5],
@@ -44,10 +46,10 @@ export class BoardComponent {
     [0, 4, 8],
     [2, 4, 6]
   ];
-  
+
 
   handleSquareClick(squareNumber: number) {
-    this.hasGameStarted=true;
+    this.hasGameStarted = true;
     const square = this.getSquare(squareNumber);
     this.movementHistory.push({
       player: this.currentPlayer,
@@ -59,17 +61,26 @@ export class BoardComponent {
 
     if (this.hasCurrentPlayerWon()) {
       this.hasGameFinished = true;
+      this.pauseTimer();
       this.disableAllSquares();
     } else if (this.hasDrawHappend()) {
       this.finishedAsDraw = true;
+      this.pauseTimer();
     } else {
       this.currentPlayer = (this.currentPlayer === 'X') ? 'O' : 'X';
-      
+      if (this.currentPlayer === 'X') {
+        this.timeLeft = 10;
+        this.pauseTimer();
+        this.startTimer();
+      } else {
+        this.timeLeft = 10;
+        this.pauseTimer();
+        this.startTimer();
+      }
     }
   }
 
   restart() {
-    // this.resBool=false;
     this.hasGameStarted = false;
     this.hasGameFinished = false;
     this.finishedAsDraw = false;
@@ -83,14 +94,12 @@ export class BoardComponent {
       square.enabled = true;
 
     })
-    
+
   }
-  onStart(){
+  onStart() {
     this.start = true;
   }
-  // getMovementsFromPlayer(playerName: string) {
-  //   return this.movementHistory.filter((movement) => movement.player === playerName);
-  // }
+  
 
   private getSquare(squareNumber: number): SquareComponent {
     return this.squares.find((square) => square.squareNumber == squareNumber);
@@ -106,7 +115,7 @@ export class BoardComponent {
         move.squareNumber === b ||
         move.squareNumber === c);
 
-      if (matchingMovements.length === 3) {        
+      if (matchingMovements.length === 3) {
         return true;
       }
     }
@@ -123,11 +132,20 @@ export class BoardComponent {
       square.enabled = false;
     });
   }
-  
-  // CountdownStatus(event){
-  //   if (event == 0)
-  //   alert("zero");
-  // }
-  
 
+ 
+
+  startTimer() {
+    this.interval = setInterval(() => {
+      if (this.timeLeft > 0) {
+        this.timeLeft--;
+      } else {
+        this.timeLeft = 10;
+      }
+    }, 1000)
+  }
+
+  pauseTimer() {
+    clearInterval(this.interval);
+  }
 }

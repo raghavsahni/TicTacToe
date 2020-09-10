@@ -17,7 +17,8 @@ placeholder="Player1"
 type="button" 
 class="btn btn-danger mx-5  " 
 (click)="onStart()">
-Start
+<span *ngIf='!start'>Start</span>
+<span *ngIf='start'>{{timeLeft}} Seconds Left....</span>
 </button>
 
 <input 
@@ -49,10 +50,6 @@ placeholder="Player2"
   </div>
 </div>
 
-
-
-<!-- <countdown [config]="{ leftTime: 5, format: 's'   }"  > </countdown> -->
-
 <div class = "resultDisp mt-3"> 
   <ng-container *ngIf="hasGameFinished"  >
     <p>
@@ -77,7 +74,3 @@ class="btn btn-danger Restart"
 (click)="restart()">
 Restart
 </button>
-
-
-
-
