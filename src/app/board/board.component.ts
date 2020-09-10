@@ -139,11 +139,10 @@ export class BoardComponent {
                 this.isTimer = false;
                 this.timeLeft--;
             } else {
-                console.log("IIII");
+                
 
                 this.isTimer = true;
-                // this.currentPlayer == this.name1 ? this.currentPlayer = this.name2 : this.currentPlayer = this.name1;
-                // console.log(this.currentPlayer);
+                
                 this.timeLeft = 5;
             }
         }, 1000)

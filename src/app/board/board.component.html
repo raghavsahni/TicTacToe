@@ -53,7 +53,6 @@ placeholder="Player2"
 <div class = "resultDisp mt-3">
 <ng-container *ngIf="hasGameFinished" >
 <p>
-<!-- <span><strong> {{currentPlayer === 'X' ? name1 +' Wins!(X)' : name2 +' Wins!(0)'}} </strong> </span> -->
 <span *ngIf="timeLeft !== 0"><strong> {{currentPlayer === 'X' ? name1 + ' Wins!(X)' : name2 + ' Wins!(0)'}} </strong> </span>
 <span *ngIf="timeLeft === 0"><strong> {{currentPlayer === 'X' ? name2 + ' Wins!(0)' : name1 + ' Wins!(X)'}} </strong> </span>
 </p>
