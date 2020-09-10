@@ -1,14 +1,21 @@
-
+<!-- <form> -->
 <input 
 class='p border'
 [ngStyle] = "{backgroundColor: currentPlayer=='X'?'#90EE90' : 'transparent' }"
 [disabled]="start " 
 type='text' 
 [(ngModel)]="name1" 
-placeholder="Player1">
+placeholder="Player1"
+>
 
 
-<button type="button" class="btn btn-danger mx-5  " (click)="onStart()">Start</button>
+<button
+[disabled] ='!(name1.length > 0 && name2.length > 0)'
+type="button" 
+class="btn btn-danger mx-5  " 
+(click)="onStart()">
+Start
+</button>
 
 <input 
 class='border'
@@ -16,8 +23,9 @@ class='border'
 [disabled]="start " 
 type='text'
 [(ngModel)]="name2"
-placeholder="Player2">
-
+placeholder="Player2"
+>
+<!-- </form> -->
 
 <div *ngIf='start' >
 
