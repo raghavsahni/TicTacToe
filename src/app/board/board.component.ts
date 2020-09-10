@@ -21,7 +21,18 @@ export class BoardComponent {
   name1 : string ='';
   name2 : string ='';
   start : boolean = false;
+  i : number = 0;
  
+  // constructor(){
+  //   (function repeat(times){
+  //     if (++(this.i) > 5) return;
+  //     setTimeout(function(){
+  //       console.log("Iteration: " + this.i);
+  //       repeat();
+  //     }, 5000);
+  //   })();
+  // }
+  
   
   winningCombinations = [
     [0, 1, 2],
@@ -112,7 +123,11 @@ export class BoardComponent {
       square.enabled = false;
     });
   }
-
+  
+  // CountdownStatus(event){
+  //   if (event == 0)
+  //   alert("zero");
+  // }
   
 
 }

@@ -1,4 +1,8 @@
-<!-- <form> -->
+<div class="mx-4">
+  <h1>Tic Tac Toe</h1>
+  <h6>Enter Player's Name and Click on Start to Play the game</h6>
+</div>
+
 <input 
 class='p border'
 [ngStyle] = "{backgroundColor: currentPlayer=='X'?'#90EE90' : 'transparent' }"
@@ -7,7 +11,6 @@ type='text'
 [(ngModel)]="name1" 
 placeholder="Player1"
 >
-
 
 <button
 [disabled] ='!(name1.length > 0 && name2.length > 0)'
@@ -25,33 +28,35 @@ type='text'
 [(ngModel)]="name2"
 placeholder="Player2"
 >
-<!-- </form> -->
 
-<div *ngIf='start' >
 
-  <div class="board-row ">
+<div *ngIf='start'>
+
+  <div class="board-row mb-0  ">
     <square [squareNumber]="0" (onSquareClick)="handleSquareClick(0)"></square>
     <square [squareNumber]="1" (onSquareClick)="handleSquareClick(1)"></square>
     <square [squareNumber]="2" (onSquareClick)="handleSquareClick(2)"></square>
   </div>
-  <div class="board-row">
+  <div class="board-row mb-0" >
     <square [squareNumber]="3" (onSquareClick)="handleSquareClick(3)"></square>
     <square [squareNumber]="4" (onSquareClick)="handleSquareClick(4)"></square>
     <square [squareNumber]="5" (onSquareClick)="handleSquareClick(5)"></square>
   </div>
-  <div class="board-row">
+  <div class="board-row mt-0">
     <square [squareNumber]="6" (onSquareClick)="handleSquareClick(6)"></square>
     <square [squareNumber]="7" (onSquareClick)="handleSquareClick(7)"></square>
     <square [squareNumber]="8" (onSquareClick)="handleSquareClick(8)"></square>
   </div>
 </div>
 
-<!-- <countdown [config]="{ leftTime: 5, format: 's' }"></countdown> -->
 
-<div class="resultDisp mt-3"> 
+
+<!-- <countdown [config]="{ leftTime: 5, format: 's'   }"  > </countdown> -->
+
+<div class = "resultDisp mt-3"> 
   <ng-container *ngIf="hasGameFinished"  >
     <p>
-      <span><strong> {{currentPlayer === 'X' ?  name1 +' Wins!' : name2 +' Wins!'}} </strong> </span>
+      <span><strong> {{currentPlayer === 'X' ?  name1 +' Wins!(X)' : name2 +' Wins!(0)'}} </strong> </span>
       
     </p>
   </ng-container>
@@ -64,16 +69,6 @@ placeholder="Player2"
   </ng-container>
 </div>
 
-<br>
-<countdown [config]="{ leftTime: 5, format: 's' }"></countdown>
-
-<!-- Timer mode:
-<countdown-timer [start]="'2017-01-01 00:00:50'"></countdown-timer>
- 
-Countdown:
-<countdown-timer [end]="'2018-01-01 00:00:50'"></countdown-timer> -->
-<br>
-
 
 <button 
 *ngIf='hasGameFinished || finishedAsDraw '
@@ -84,6 +79,5 @@ Restart
 </button>
 
 
-<br>
 
 
