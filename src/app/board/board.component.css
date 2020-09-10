@@ -1,20 +1,25 @@
 .board-row {
     display: flex;
+    margin-left: 170px;
+    
+}
+.p {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-bottom: 50px;
+}
+.Restart {
+    margin-top: 20px;
+    margin-left: 260px;
 }
 
-.players-history-board {
-    display: flex;
+.border{
+    border-radius: 5px;
+  }
+.btn {
+    border-radius: 25px;
 }
 
-.player-data {
-    width: 400px;
+.resultDisp {
+    margin-left: 260px;
 }
-
-.button {
-    padding: 10px;
-    margin-bottom: 20px;
-}
-.form-control {
-    margin:0 5px;
-    margin:5px 0; 
-   }

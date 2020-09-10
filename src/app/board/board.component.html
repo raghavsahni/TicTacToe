@@ -1,25 +1,28 @@
 
-<input
+<input 
+class='p border'
 [ngStyle] = "{backgroundColor: currentPlayer=='X'?'#90EE90' : 'transparent' }"
-[disabled]="hasGameStarted " 
+[disabled]="start " 
 type='text' 
 [(ngModel)]="name1" 
 placeholder="Player1">
 
 
-<button type="button" class="btn btn-danger mx-5 " (click)="onStart()">Start</button>
+<button type="button" class="btn btn-danger mx-5  " (click)="onStart()">Start</button>
 
 <input 
+class='border'
 [ngStyle] = "{backgroundColor: currentPlayer!='X'?'#90EE90' : 'transparent' }"
-[disabled]="hasGameStarted " 
+[disabled]="start " 
 type='text'
 [(ngModel)]="name2"
 placeholder="Player2">
+<!-- <br>
+<countdown [config]="{ leftTime: 5, format: 's' }"></countdown> -->
 
+<div *ngIf='start' >
 
-<div *ngIf='start'>
-
-  <div class="board-row">
+  <div class="board-row ">
     <square [squareNumber]="0" (onSquareClick)="handleSquareClick(0)"></square>
     <square [squareNumber]="1" (onSquareClick)="handleSquareClick(1)"></square>
     <square [squareNumber]="2" (onSquareClick)="handleSquareClick(2)"></square>
@@ -36,24 +39,33 @@ placeholder="Player2">
   </div>
 </div>
 
-<ng-container *ngIf="hasGameFinished" >
-  <p>
-    <span><strong> {{currentPlayer === 'X' ?  name1 +' Wins!' : name2 +' Wins!'}} </strong> </span>
-    
-  </p>
-</ng-container>
+<!-- <countdown [config]="{ leftTime: 5, format: 's' }"></countdown> -->
 
-<ng-container *ngIf="finishedAsDraw">
-  <p>
-    <strong>It's a draw.</strong>
-    
-  </p>
-</ng-container>
+<div class="resultDisp mt-3"> 
+  <ng-container *ngIf="hasGameFinished"  >
+    <p>
+      <span><strong> {{currentPlayer === 'X' ?  name1 +' Wins!' : name2 +' Wins!'}} </strong> </span>
+      
+    </p>
+  </ng-container>
+
+  <ng-container *ngIf="finishedAsDraw" > 
+    <p>
+      <strong>It's a draw.</strong>
+      
+    </p>
+  </ng-container>
+</div>
 
 <button 
 *ngIf='hasGameFinished || finishedAsDraw '
 type="button" 
-class="btn btn-danger mx-5" 
+class="btn btn-danger Restart" 
 (click)="restart()">
 Restart
 </button>
+
+
+<br>
+
+

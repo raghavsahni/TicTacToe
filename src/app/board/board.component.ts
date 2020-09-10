@@ -112,4 +112,7 @@ export class BoardComponent {
       square.enabled = false;
     });
   }
+
+  
+
 }
