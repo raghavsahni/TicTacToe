@@ -1,75 +1,60 @@
 <div class="mx-4">
-<h1>Tic Tac Toe</h1>
-<h6>Enter Player's Name and Click on Start to Play the game</h6>
+    <h1>Tic Tac Toe</h1>
+    <h6>Enter Player's Name and Click on Start to Play the game</h6>
 </div>
 
-<input
-class='p border'
-[ngStyle] = "{backgroundColor: currentPlayer=='X'?'#90EE90' : 'transparent' }"
-[disabled]="start "
-type='text'
-[(ngModel)]="name1"
-placeholder="Player1"
->
+<app-timer *ngIf="start" #timer></app-timer>
 
-<button
-[disabled] ='!(name1.length > 0 && name2.length > 0)'
-type="button"
-class="btn btn-danger mx-5 "
-(click)="onStart()">
-<span *ngIf='!start'>Start</span>
-<span *ngIf='start'>{{timeLeft}} Seconds Left....</span>
+<input class='p border' [ngStyle]="{backgroundColor: currentPlayer=='X'?'#90EE90' : 'transparent' }" [disabled]="start "
+    type='text' [(ngModel)]="name1" placeholder="Player1">
+
+<button *ngIf='!start' [disabled]='!(name1.length > 0 && name2.length > 0)' type="button" class="btn btn-danger mx-5 "
+    (click)="onStart()">
+    <span >Start</span>
 </button>
 
-<input
-class='border'
-[ngStyle] = "{backgroundColor: currentPlayer!='X'?'#90EE90' : 'transparent' }"
-[disabled]="start "
-type='text'
-[(ngModel)]="name2"
-placeholder="Player2"
->
+<input class='border' [ngStyle]="{backgroundColor: currentPlayer!='X'?'#90EE90' : 'transparent' }" [disabled]="start "
+    type='text' [(ngModel)]="name2" placeholder="Player2">
 
 
 <div *ngIf='start'>
 
-<div class="board-row mb-0 ">
-<square [squareNumber]="0" (onSquareClick)="handleSquareClick(0)"></square>
-<square [squareNumber]="1" (onSquareClick)="handleSquareClick(1)"></square>
-<square [squareNumber]="2" (onSquareClick)="handleSquareClick(2)"></square>
-</div>
-<div class="board-row mb-0" >
-<square [squareNumber]="3" (onSquareClick)="handleSquareClick(3)"></square>
-<square [squareNumber]="4" (onSquareClick)="handleSquareClick(4)"></square>
-<square [squareNumber]="5" (onSquareClick)="handleSquareClick(5)"></square>
-</div>
-<div class="board-row mt-0">
-<square [squareNumber]="6" (onSquareClick)="handleSquareClick(6)"></square>
-<square [squareNumber]="7" (onSquareClick)="handleSquareClick(7)"></square>
-<square [squareNumber]="8" (onSquareClick)="handleSquareClick(8)"></square>
-</div>
-</div>
-
-<div class = "resultDisp mt-3">
-<ng-container *ngIf="hasGameFinished" >
-<p>
-<span *ngIf="timeLeft !== 0"><strong> {{currentPlayer === 'X' ? name1 + ' Wins!(X)' : name2 + ' Wins!(0)'}} </strong> </span>
-<span *ngIf="timeLeft === 0"><strong> {{currentPlayer === 'X' ? name2 + ' Wins!(0)' : name1 + ' Wins!(X)'}} </strong> </span>
-</p>
-</ng-container>
-
-<ng-container *ngIf="finishedAsDraw" >
-<p>
-<strong>It's a draw.</strong>
-</p>
-</ng-container>
+    <div class="board-row mb-0 ">
+        <square [squareNumber]="0" (onSquareClick)="handleSquareClick(0)"></square>
+        <square [squareNumber]="1" (onSquareClick)="handleSquareClick(1)"></square>
+        <square [squareNumber]="2" (onSquareClick)="handleSquareClick(2)"></square>
+    </div>
+    <div class="board-row mb-0">
+        <square [squareNumber]="3" (onSquareClick)="handleSquareClick(3)"></square>
+        <square [squareNumber]="4" (onSquareClick)="handleSquareClick(4)"></square>
+        <square [squareNumber]="5" (onSquareClick)="handleSquareClick(5)"></square>
+    </div>
+    <div class="board-row mt-0">
+        <square [squareNumber]="6" (onSquareClick)="handleSquareClick(6)"></square>
+        <square [squareNumber]="7" (onSquareClick)="handleSquareClick(7)"></square>
+        <square [squareNumber]="8" (onSquareClick)="handleSquareClick(8)"></square>
+    </div>
 </div>
 
+<div class="resultDisp mt-3">
+    <ng-container *ngIf="hasGameFinished">
+        <p>
+            <span *ngIf="timeLeft !== 0"><strong> {{currentPlayer === 'X' ? name1 + ' Wins!(X)' : name2 + ' Wins!(0)'}}
+                </strong> </span>
+            <span *ngIf="timeLeft === 0"><strong> {{currentPlayer === 'X' ? name2 + ' Wins!(0)' : name1 + ' Wins!(X)'}}
+                </strong> </span>
+        </p>
+    </ng-container>
 
-<button
-*ngIf='hasGameFinished || finishedAsDraw || isTimer'
-type="button"
-class="btn btn-danger Restart"
-(click)="restart()">
-Restart
+    <ng-container *ngIf="finishedAsDraw">
+        <p>
+            <strong>It's a draw.</strong>
+        </p>
+    </ng-container>
+</div>
+
+
+<button *ngIf='hasGameFinished || finishedAsDraw || timer?.isTimer' type="button" class="btn btn-danger Restart"
+    (click)="restart()">
+    Restart
 </button>

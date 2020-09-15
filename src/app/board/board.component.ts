@@ -1,6 +1,7 @@
-import { Component, ViewChildren, QueryList } from '@angular/core';
+import { Component, ViewChildren, QueryList, ViewChild } from '@angular/core';
 import { SquareComponent } from '../square/square.component';
 import { Movement } from '../models/movement';
+import { TimerComponent } from './timer/timer/timer.component';
 
 
 @Component({
@@ -11,6 +12,7 @@ import { Movement } from '../models/movement';
 })
 export class BoardComponent {
     @ViewChildren(SquareComponent) private squares: QueryList<SquareComponent>;
+    @ViewChild("timer") timer : TimerComponent;
     movementHistory: Movement[] = [];
     currentPlayer: string = 'X';
     hasGameStarted: boolean = false;
@@ -21,15 +23,13 @@ export class BoardComponent {
     start: boolean = false;
     i: number = 0;
 
-    timeLeft: number = 5;
-    interval;
-    isTimer: boolean = false;
+
 
 
     ngDoCheck() {
-        if (this.timeLeft === 0) {
+        if ( this.timer && this.timer.timeLeft === 0) {
             this.hasGameFinished = true;
-            this.pauseTimer();
+            this.timer.pauseTimer();
             this.disableAllSquares();
         }
     }
@@ -59,27 +59,27 @@ export class BoardComponent {
 
         if (this.hasCurrentPlayerWon()) {
             this.hasGameFinished = true;
-            this.pauseTimer();
+            this.timer.pauseTimer();
             this.disableAllSquares();
         } else if (this.hasDrawHappend()) {
             this.finishedAsDraw = true;
-            this.pauseTimer();
+            this.timer.pauseTimer();
         } else {
             this.currentPlayer = (this.currentPlayer === 'X') ? 'O' : 'X';
             if (this.currentPlayer === 'X') {
-                this.timeLeft = 5;
-                this.pauseTimer();
-                this.startTimer();
+                this.timer.timeLeft = 5;
+                this.timer.pauseTimer();
+                this.timer.startTimer();
             } else {
-                this.timeLeft = 5;
-                this.pauseTimer();
-                this.startTimer();
+                this.timer.timeLeft = 5;
+                this.timer.pauseTimer();
+                this.timer.startTimer();
             }
         }
     }
 
     restart() {
-        this.timeLeft = 5;
+        this.timer.timeLeft = 5;
         this.hasGameStarted = false;
         this.hasGameFinished = false;
         this.finishedAsDraw = false;
@@ -97,7 +97,6 @@ export class BoardComponent {
     }
     onStart() {
         this.start = true;
-        this.startTimer();
     }
 
     private getSquare(squareNumber: number): SquareComponent {
@@ -131,26 +130,4 @@ export class BoardComponent {
             square.enabled = false;
         });
     }
-
-
-    startTimer() {
-        this.interval = setInterval(() => {
-            if (this.timeLeft > 0) {
-                this.isTimer = false;
-                this.timeLeft--;
-            } else {
-                
-
-                this.isTimer = true;
-                
-                this.timeLeft = 5;
-            }
-        }, 1000)
-    }
-
-    pauseTimer() {
-        clearInterval(this.interval);
-    }
-
-
 }
